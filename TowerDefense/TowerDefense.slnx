@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="../TowerDefense.Core/TowerDefense.Core.csproj" />
+  <Project Path="../TowerDefense.Tests/TowerDefense.Tests.csproj" Id="9a9b22a2-2227-439d-b89b-3c87b9a9acfd" />
+  <Project Path="TowerDefense.csproj" />
+</Solution>

@@ -1,0 +1,43 @@
+# .NET / Visual Studio / Windows Forms
+
+# Build outputs
+bin/
+obj/
+**/bin/
+**/obj/
+
+# VS & IDE caches
+.vs/
+.idea/
+_ReSharper*/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Project user-specific files
+*.csproj.user
+
+# NuGet
+packages/
+*.nupkg
+*.snupkg
+.nuget/
+
+# Logs & temp
+*.log
+*.tlog
+*.tmp
+*.temp
+
+# Test results
+TestResult*/
+*.trx
+
+# Others
+*.cache
+*.pdb
+*.mdb
+*.opendb
+*.db
+Thumbs.db
