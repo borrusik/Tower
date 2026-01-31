@@ -1,53 +1,73 @@
-# Tower Defense (Windows Forms, C#)
+# Tower Defense Game
 
-Невелика гра жанру Tower Defense на Windows Forms із акцентом на чисту архітектуру (Factory, Strategy, State) та базову, але приємну візуалізацію.
+![Status](https://img.shields.io/badge/Status-Completed-success)
+![Language](https://img.shields.io/badge/Language-C%23-green)
+![Framework](https://img.shields.io/badge/Framework-.NET%20%2F%20Windows%20Forms-purple)
 
-## Можливості
-- Фази будівництва та хвилі (можна ставити башти під час хвилі)
-- Типи башт: Cannon (урон), Slow (уповільнення)
-- Типи ворогів: Fast (швидкі), Tank (міцні)
-- Динамічна складність: здоров’я ворогів зростає разом із номером хвилі та кількістю башт
-- Візуалізація: антиаліасинг, фон-трава та дорога з розміткою, радіуси атаки, лінії пострілів, смужки HP над ворогами
+This repository contains the source code for a **Tower Defense** strategy game built with C# and Windows Forms. The project was developed as a course assignment to demonstrate Object-Oriented Design (OOD) principles and **GoF Design Patterns**.
 
-## Структура проєкту
-- `TowerDefense/` — UI-проєкт (Windows Forms): форма, рендеринг, взаємодія з користувачем
-- `TowerDefense.Core/` — ядро ігрової логіки (Entities, Factories, States, Strategies)
-- `TowerDefense.Tests/` — тести (за бажанням)
+## 📋 Project Overview
 
-## Збірка та запуск
-```bash
-# Перейдіть у каталог UI-проєкту
-cd "TowerDefense"
+The goal of the game is to defend the base from waves of incoming enemies by strategically placing defensive towers on the map.
 
-# Зібрати
-dotnet build
+The solution allows for easy scalability due to a clean architecture separating the Core logic from the UI:
+* **TowerDefense.Core**: Contains all game logic, entities, and algorithms.
+* **TowerDefense (UI)**: Handles rendering and user interaction (Windows Forms).
+* **TowerDefense.Tests**: Unit tests ensuring logic stability.
 
-# Запустити
-dotnet run
-```
+## 🎮 Gameplay & Features
 
-## Архітектура (коротко)
-- **Factory**: `EnemyFactory`, `TowerFactory` створюють типи ворогів і башт
-- **Strategy**: `DamageAttack`, `SlowAttack` визначають поведінку атаки башт
-- **State**: `BuildState`, `WaveState`, `GameOverState` + `GameContext` керують режимами гри
+1.  **Enemy Types:**
+    * **Fast Enemy:** Moves quickly but has low health.
+    * **Tank Enemy:** Slow movement but high armor/health.
+2.  **Tower Types:**
+    * **Cannon Tower:** Deals direct damage using `DamageAttack` strategy.
+    * **Slow Tower:** Slows down enemies within range using `SlowAttack` strategy.
+3.  **Game Cycle:**
+    * **Building Phase:** Player places towers on the grid.
+    * **Wave Phase:** Enemies spawn and move towards the base; towers attack automatically.
+    * **Game Over:** Triggered when the base health reaches zero.
 
-## Ігровий процес
-1. Режим будівництва: гравець ставить башти (клік по полі, поза дорогою)
-2. Кнопка «Start Wave» запускає хвилю ворогів
-3. Під час хвилі башти автоматично атакують цілі в радіусі
-4. Башти можна ставити й у процесі хвилі
-5. За кожного вбитого ворога нараховується 5 монет
-6. Вороги, що дійшли до кінця дороги, знімають життя
-7. Після завершення хвилі — повернення в режим будівництва і перехід до наступної хвилі
+## 🏗 Architecture & Design Patterns
 
-## Керування
-- Кнопка «Start Wave» — старт хвилі або перезапуск
-- Клік по полі — встановлення башти (крім зони дороги)
-- Випадаючий список справа — вибір типу башти (Cannon / Slow)
+This project heavily utilizes design patterns to manage complexity:
 
-## Вартість башт
-- Cannon: 50
-- Slow: 70
+* **State Pattern:**
+    Manages the game loop. The `GameContext` switches between `BuildState` (placement), `WaveState` (combat), and `GameOverState`.
+    
+* **Strategy Pattern:**
+    Decouples attack algorithms from tower objects. `IAttackStrategy` allows different towers to have different behaviors (Damage vs. Slow) without altering the tower class itself.
 
-## Примітки
-- У репозиторії є `.gitignore`, який ігнорує службові каталоги та білд-артефакти: `bin/`, `obj/`, `.vs/`, `packages/`, користувацькі файли тощо.
+* **Factory Method:**
+    Encapsulates object creation. `EnemyFactory` and `TowerFactory` handle the instantiation of specific game entities.
+
+* **Template Method:**
+    Base classes like `GameObject` and `Tower` define the skeleton of operations, while subclasses implement specific steps.
+
+## 🛠 Tech Stack
+
+* **Language:** C#
+* **Framework:** .NET (Windows Forms)
+* **IDE:** Visual Studio 2022 / JetBrains Rider
+* **Graphics:** GDI+ (with Double Buffering to prevent flickering).
+
+## 💻 Installation & Setup
+
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/borrusik/tower.git](https://github.com/borrusik/tower.git)
+    ```
+2.  **Open the project:**
+    Open `TowerDefense.slnx` in Visual Studio.
+3.  **Build:**
+    Press `Ctrl + Shift + B` to build the solution.
+4.  **Run:**
+    Set the `TowerDefense` project as the **Startup Project** and press `F5`.
+
+## 👤 Author
+
+**borrusik**
+* GitHub: [borrusik](https://github.com/borrusik)
+
+---
+*Developed for the Object-Oriented Programming course (2nd Semester).*
